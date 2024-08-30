@@ -1,0 +1,31 @@
+@startuml diagrama de componentes
+!define RECTANGLE class
+skinparam backgroundColor #EEEBDC
+skinparam classBackgroundColor White
+skinparam shadowing false
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+
+package "API Gateway" {
+    RECTANGLE "Gestor de Solicitudes" as RequestHandler
+    RECTANGLE "Autenticación y Autorización" as Auth
+    RECTANGLE "Enrutador de Servicios" as ServiceRouter
+    RECTANGLE "Gestión de Throttling" as Throttling
+    RECTANGLE "Monitorización y Logs" as Monitoring
+    RECTANGLE "Cache de Respuestas" as ResponseCache
+    RECTANGLE "Gestión de Errores" as ErrorHandling
+}
+
+Clientes --> RequestHandler : Envía solicitudes API
+RequestHandler --> Auth : Verifica la identidad del cliente
+Auth --> ServiceRouter : Enruta las solicitudes a los servicios internos o externos
+ServiceRouter --> Throttling : Aplica políticas de rate limiting
+ServiceRouter --> ResponseCache : Verifica si la respuesta está en la caché
+ServiceRouter --> ServiciosInternos : Llama a microservicios internos
+ServiceRouter --> ServiciosExternos : Llama a APIs externas
+ServiceRouter --> ErrorHandling : Gestiona errores de solicitud
+ServiceRouter --> Monitoring : Envía datos para monitoreo y logs
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml integracion_aws
+!define RECTANGLE class
+skinparam backgroundColor #EEEBDC
+skinparam classBackgroundColor White
+skinparam shadowing false
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+
+package "AWS Infrastructure" {
+    RECTANGLE "VPC" as VPC {
+        RECTANGLE "Public Subnets (Multi-AZ)" as PublicSubnets
+        RECTANGLE "Private Subnets (Multi-AZ)" as PrivateSubnets
+        RECTANGLE "NAT Gateways" as NATGateways
+        RECTANGLE "Internet Gateway" as InternetGateway
+    }
+}
+
+package "Kubernetes Cluster (EKS)" {
+    RECTANGLE "EKS Control Plane" as EKSControlPlane
+    RECTANGLE "Node Group (Multi-AZ)" as NodeGroup
+    RECTANGLE "Load Balancer (ELB)" as LoadBalancer
+    RECTANGLE "Auto Scaling" as AutoScaling
+    RECTANGLE "Persistent Storage (EFS/S3)" as PersistentStorage
+}
+
+package "Database and Storage" {
+    RECTANGLE "Amazon RDS (Multi-AZ)" as RDS
+    RECTANGLE "Amazon S3 (Cross-Region)" as S3
+    RECTANGLE "Amazon EFS" as EFS
+}
+
+package "Security" {
+    RECTANGLE "IAM Roles & Policies" as IAM
+    RECTANGLE "Security Groups" as SecurityGroups
+    RECTANGLE "KMS (Key Management)" as KMS
+    RECTANGLE "WAF (Web Application Firewall)" as WAF
+}
+
+PublicSubnets --> EKSControlPlane : Control Plane
+PrivateSubnets --> NodeGroup : Worker Nodes
+NATGateways --> NodeGroup : Acceso seguro a Internet
+InternetGateway --> LoadBalancer : Exponer servicios
+NodeGroup --> PersistentStorage : Almacenamiento persistente
+NodeGroup --> RDS : Acceso a base de datos
+PersistentStorage --> EFS : Almacenamiento compartido
+PersistentStorage --> S3 : Almacenamiento de objetos
+
+LoadBalancer --> WAF : Protección de aplicaciones
+NodeGroup --> SecurityGroups : Control de tráfico
+NodeGroup --> IAM : Gestión de permisos
+NodeGroup --> KMS : Cifrado de datos
+
+RDS --> S3 : Backups y replicación
+S3 --> CrossRegion : Replicación de datos

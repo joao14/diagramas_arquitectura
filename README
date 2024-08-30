@@ -1,0 +1,45 @@
+# Visualizar Diagramas con PlantUML en Visual Studio
+
+Este documento describe cómo utilizar PlantUML para ver diagramas directamente en Visual Studio.
+
+## Pasos para ver diagramas con PlantUML
+
+1. **Instala la extensión PlantUML para Visual Studio**:
+   - Abre Visual Studio.
+   - Ve a la sección de extensiones y busca "PlantUML".
+   - Instala la extensión.
+
+2. **Abre el archivo PlantUML que contiene el diagrama**:
+   - Navega hasta el archivo `.puml` o cualquier archivo compatible con PlantUML en tu proyecto.
+
+3. **Visualiza el diagrama**:
+   - Haz clic derecho en el archivo del diagrama.
+   - Selecciona "View PlantUML Diagram" en el menú contextual.
+
+4. **Renderiza y visualiza**:
+   - El diagrama se renderizará y se mostrará dentro de Visual Studio.
+
+> **Nota**: Asegúrate de tener instalada y configurada la extensión PlantUML en Visual Studio para que esta función funcione correctamente.
+
+## Acerca de
+
+Este proyecto incluye un ejemplo de código para demostrar cómo visualizar diagramas con PlantUML en Visual Studio.
+
+```java
+/**
+ * Este fragmento de código demuestra el uso de PlantUML para ver diagramas en Visual Studio.
+ * 
+ * Para ver diagramas usando PlantUML en Visual Studio, sigue estos pasos:
+ * 1. Instala la extensión PlantUML para Visual Studio.
+ * 2. Abre el archivo PlantUML que contiene el diagrama.
+ * 3. Haz clic derecho en el archivo del diagrama y selecciona "View PlantUML Diagram" en el menú contextual.
+ * 4. El diagrama se renderizará y se mostrará dentro de Visual Studio.
+ * 
+ * Nota: Asegúrate de tener instalada y configurada la extensión PlantUML en Visual Studio para que esta función funcione.
+ */
+
+/**
+ * Este es un comentario de documentación.
+ * 
+ * @author Alexander Merino
+ */

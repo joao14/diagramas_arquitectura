@@ -1,0 +1,38 @@
+@startuml diagrama de patrones de tecnología
+!define RECTANGLE class
+skinparam backgroundColor #EEEBDC
+skinparam classBackgroundColor White
+skinparam shadowing false
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+
+package "Frontend (React.js)" {
+    RECTANGLE "UI Components" as UIComponents
+    RECTANGLE "State Management (Redux/Context)" as StateManagement
+    RECTANGLE "API Calls (Axios/Fetch)" as APICalls
+    RECTANGLE "Routing (react-router)" as Routing
+}
+
+package "Backend (Spring Boot)" {
+    RECTANGLE "REST Controllers" as Controllers
+    RECTANGLE "Service Layer" as Services
+    RECTANGLE "Data Transfer Objects (DTOs)" as DTOs
+    RECTANGLE "Repositories (JPA)" as Repositories
+    RECTANGLE "Spring Security (JWT)" as Security
+}
+
+UIComponents --> StateManagement : Maneja el estado global
+UIComponents --> Routing : Navegación entre vistas
+UIComponents --> APICalls : Llama a APIs RESTful
+
+APICalls --> Controllers : Envía solicitudes HTTP
+
+Controllers --> Services : Lógica de negocio
+Services --> Repositories : Acceso a datos
+Services --> DTOs : Transfiere datos entre frontend y backend
+Services --> Security : Autenticación y Autorización
+Repositories --> BaseDeDatos : Consulta y actualización de datos
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml diagrama de contenedores
+!define RECTANGLE class
+skinparam backgroundColor #EEEBDC
+skinparam classBackgroundColor White
+skinparam shadowing false
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+
+package "Banco Tradicional" {
+    RECTANGLE Clientes
+    RECTANGLE Regulaciones
+}
+
+package "Plataforma del Banco" {
+    RECTANGLE "Core Bancario Tradicional" as CoreTradicional
+    RECTANGLE "Nuevo Core Bancario Digital" as CoreDigital
+    RECTANGLE "Banca Web" as BancaWeb
+    RECTANGLE "Banca Móvil" as BancaMovil
+    RECTANGLE "API Gateway" as APIGateway
+    RECTANGLE "Sistema de Gestión de Riesgos" as GestionRiesgos
+    RECTANGLE "Sistema de Prevención de Fraudes" as PrevencionFraudes
+    RECTANGLE "Base de Datos Transaccional" as BDTransaccional
+}
+
+package "Servicios Externos" {
+    RECTANGLE "Plataforma de Servicios de Pago" as Pago
+    RECTANGLE "APIs de Terceros (Open Finance)" as OpenFinance
+}
+
+Clientes --> APIGateway : Realiza operaciones bancarias
+APIGateway --> CoreTradicional : Acceso a cuentas tradicionales
+APIGateway --> CoreDigital : Acceso a nuevas cuentas digitales
+BancaWeb --> APIGateway : Operaciones a través de Web
+BancaMovil --> APIGateway : Operaciones a través de Móvil
+APIGateway --> Pago : Procesa pagos externos
+APIGateway --> OpenFinance : Integra con APIs de terceros
+CoreTradicional --> BDTransaccional : Consulta y actualiza datos
+CoreDigital --> BDTransaccional : Consulta y actualiza datos
+APIGateway --> GestionRiesgos : Analiza riesgos de transacciones
+APIGateway --> PrevencionFraudes : Monitorea actividades sospechosas
+
+@enduml

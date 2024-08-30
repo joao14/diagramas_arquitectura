@@ -1,0 +1,34 @@
+@startuml diagrama de componentes
+!define RECTANGLE class
+skinparam backgroundColor #EEEBDC
+skinparam classBackgroundColor White
+skinparam shadowing false
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+
+RECTANGLE BancoTradicional {
+    :Clientes;
+    :Regulaciones;
+}
+
+RECTANGLE ServiciosExternos {
+    :Servicios de Pago;
+    :APIs de Terceros (Open Finance);
+}
+
+RECTANGLE SistemasInternos {
+    :Core Bancario Tradicional;
+    :Nuevo Core Bancario Digital;
+    :Banca Web;
+    :Banca Móvil;
+    :Sistema de Gestión de Riesgos;
+    :Sistema de Prevención de Fraudes;
+}
+
+BancoTradicional --> SistemasInternos : Transacciones
+SistemasInternos --> ServiciosExternos : Integración de pagos, APIs de terceros
+ServiciosExternos --> BancoTradicional : Información de pago, Respuesta de APIs
+
+@enduml
